@@ -30,4 +30,14 @@ public class Message {
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "messages")
     private Set<Chat> chats;
+
+    public void addChat(Chat chat) {
+        addChat(chat, true);
+    }
+
+    protected void addChat(Chat chat, boolean sf) {
+        this.chats.add(chat);
+
+        if (sf) chat.addMessage(this, false);
+    }
 }

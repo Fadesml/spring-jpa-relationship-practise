@@ -26,4 +26,14 @@ public class Chat {
             joinColumns = @JoinColumn(name = "chat_id"),
             inverseJoinColumns = @JoinColumn(name = "message_id"))
     private Set<Message> messages;
+
+    public void addMessage(Message message) {
+        addMessage(message, true);
+    }
+
+    protected void addMessage(Message message, boolean sf) {
+        this.messages.add(message);
+
+        if (sf) message.addChat(this, false);
+    }
 }
